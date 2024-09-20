@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            Django App
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="/" title="Home">🏠</a> |
+        <a href="/about" title="About">🤷‍♂️</a> |
+        <a href="/posts" title="Posts">📰</a> |
+        <a href="/users/contact" title="Contact Us">📞</a> |
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" title="Logout">📤</a>
+            <p>Welcome, {{ user.username }}!</p>
+        {% else %}
+            <a href="/users/register" title="Registration">✒️</a> |
+            <a href="/users/login" title="Log in">🪵</a>
+        {% endif %}
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
